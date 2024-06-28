@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Availability Poll</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="poll-container">
+        <h2>Company Availability Poll</h2>
+        <form id="pollForm">
+            <label for="day">Select the best day:</label>
+            <select id="day" name="day" required>
+                <option value="">Select a day</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+            </select>
+            <br><br>
+            <label for="time">Select your available times:</label><br>
+            <label>
+                <input type="checkbox" name="time" value="Morning"> Morning (9 AM - 12 PM)
+            </label><br>
+            <label>
+                <input type="checkbox" name="time" value="Afternoon"> Afternoon (12 PM - 5 PM)
+            </label><br>
+            <label>
+                <input type="checkbox" name="time" value="Evening"> Evening (5 PM - 9 PM)
+            </label><br><br>
+            <button type="button" onclick="submitPoll()">Submit</button>
+        </form>
+        <div id="pollResults" style="display: none;">
+            <h3>Results:</h3>
+            <p>Best Day: <span id="resultDay">N/A</span></p>
+            <p>Morning: <span id="resultMorning">0</span> votes</p>
+            <p>Afternoon: <span id="resultAfternoon">0</span> votes</p>
+            <p>Evening: <span id="resultEvening">0</span> votes</p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
