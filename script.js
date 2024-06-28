@@ -1,13 +1,5 @@
-let results = {
-    day: {
-        Monday: 0,
-        Tuesday: 0,
-        Wednesday: 0,
-        Thursday: 0,
-        Friday: 0,
-        Saturday: 0,
-        Sunday: 0
-    },
+let results = {   // the global variable
+    day: {},
     time: {
         Morning: 0,
         Afternoon: 0,
@@ -15,29 +7,35 @@ let results = {
     }
 };
 
-function submitPoll() {
+function submitPoll() {  //Function02 handle the form submission
     const form = document.getElementById('pollForm');
     const day = form.day.value;
-    const times = Array.from(form.time).filter(input => input.checked).map(input => input.value);
+    const times = Array.from(form.querySelectorAll('input[name="time"]:checked')).map(input => input.value);
 
     if (!day || times.length === 0) {
         alert('Please select a day and at least one available time');
         return;
     }
 
+    if (!results.day[day]) {
+        results.day[day] = 0;
+    }
     results.day[day]++;
-    times.forEach(time => results.time[time]++);
+    
+    times.forEach(time => {
+        results.time[time]++;
+    });
 
     displayResults();
     form.reset();
 }
 
-function displayResults() {
+function displayResults() {   //Function01 display the final results in the web
     const bestDay = Object.keys(results.day).reduce((a, b) => results.day[a] > results.day[b] ? a : b, "N/A");
-    document.getElementById('resultDay').innerText = bestDay;
-    document.getElementById('resultMorning').innerText = results.time.Morning;
-    document.getElementById('resultAfternoon').innerText = results.time.Afternoon;
-    document.getElementById('resultEvening').innerText = results.time.Evening;
+    document.getElementById('resultDay').innerText = `Best Day: ${bestDay}`;
+    document.getElementById('resultMorning').innerText = `Morning: ${results.time.Morning} votes`;
+    document.getElementById('resultAfternoon').innerText = `Afternoon: ${results.time.Afternoon} votes`;
+    document.getElementById('resultEvening').innerText = `Evening: ${results.time.Evening} votes`;
 
     document.getElementById('pollResults').style.display = 'block';
 }
